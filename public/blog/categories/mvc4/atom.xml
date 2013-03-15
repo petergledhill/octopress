@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MVC4 | Peter Gledhill, Freelance Developer]]></title>
+  <link href="http://peteg.eu/blog/categories/mvc4/atom.xml" rel="self"/>
+  <link href="http://peteg.eu/"/>
+  <updated>2013-03-15T14:51:12+00:00</updated>
+  <id>http://peteg.eu/</id>
+  <author>
+    <name><![CDATA[Peter Gledhill]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using MVC4 bundler with a Content Delivery Network]]></title>
+    <link href="http://peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/"/>
+    <updated>2013-03-15T10:46:00+00:00</updated>
+    <id>http://peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network</id>
+    <content type="html"><![CDATA[<h2>Problem</h2>
+
+<p>With the MVC4 bundler; you might come to a point where you want to host your assets on a CDN.</p>
+
+<p>Well that's easy hey? The bundler allows you to specify a CDN url for each bundle, so you can use a local file when developing and the file from the CDN when deployed. Like so:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MVC4 Bundling and Minification </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">bundles</span><span class="p">.</span><span class="n">UseCdn</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>   <span class="c1">//enable CDN support</span>
+</span><span class='line'><span class="n">bundles</span><span class="p">.</span><span class="n">Add</span><span class="p">(&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="k">new</span> <span class="n">ScriptBundle</span><span class="p">(</span><span class="s">&quot;~/bundles/site-scripts&quot;</span><span class="p">,</span> <span class="s">&quot;http://MYCDNURL/bundles/site-scripts&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">.</span><span class="n">Include</span><span class="p">(</span>
+</span><span class='line'>    <span class="s">&quot;~/Scripts/sitejs.js&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s">&quot;~/Scripts/sitejs2.js&quot;</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;);&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="c1">// will produce a tags like so:</span>
+</span><span class='line'><span class="c1">// in development: &lt;script src=&quot;http://peteg.eu/bundles/site-scripts?v=BAhWhKO17E6GODxEzM0RwLP7V19cP-pbsCGwKj79-EI1&quot; &gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="c1">// in production : &lt;script src=&quot;http://MYCDNURL/bundles/site-scripts&quot; &gt;&lt;/script&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The problem with this approach is that you lose the cache busting query string which the bundler generates.  The query string is a hash of bundle contents so it changes when the content changes.</p>
+
+<p>The query string is handy to have when deploying to a CDN as it means you don't have to manually invalidate the file on the CDN (something which I'd quite easily forget to do).</p>
+
+<p><strong>Note: Amazon CloudFront can be configured to respond to query strings. Some CDNs ignore them.  If that's the case, then this solution won't help.</strong></p>
+
+<p><strong>Note: I never actually upload anything to my CDN. I'm have my CDN setup to pull files from my webserver when they are first requested. This is called an 'Origin Pull' setup. </strong></p>
+
+<h2>Solution</h2>
+
+<p>This solution is taken directly form this <a href="http://stackoverflow.com/a/6892794" title="Put images on CDN, using MVC3 on IIS7">stackoverflow answer by Mike Richards</a>.</p>
+
+<p>The solution uses an ActionFilter to rewrite the response before it is sent back to the client.  You should end up with scripts / css tags like so:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>// protocol left off to match the parent request<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://peteg.eu//MYCDNURL/bundles/site-scripts?v=BAhWhKO17E6GODxEzM0RwLP7V19cP-pbsCGwKj79-EI1&quot;</span> <span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>First create a custom MemoryStream class to rewrite the stream:
+<div><script src='https://gist.github.com/5169331.js?file=CdnRewriteResponse.cs'></script>
+<noscript><pre><code>using System;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace MVC4_CDN_Rewrite_Example.Utils
+{
+    public class CdnRewriteResponse : MemoryStream
+    {
+        private Stream Stream { get; set; }
+        private string CdnDomain { get; set; }
+
+        public CdnRewriteResponse(Stream stream, string cdnDomain)
+        {
+            Stream = stream;
+            CdnDomain = cdnDomain;
+        }
+
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            var data = new byte[count];
+            Buffer.BlockCopy(buffer, offset, data, 0, count);
+            string html = Encoding.Default.GetString(buffer);
+
+            html = Regex.Replace(html, &quot;=\&quot;/Content/([^\&quot;]+)\&quot;&quot;, RewriteContent);
+            html = Regex.Replace(html, &quot;=\&quot;/bundles/([^\&quot;]+)\&quot;&quot;, RewriteBundles);
+
+            byte[] outData = Encoding.Default.GetBytes(html);
+            Stream.Write(outData, 0, outData.GetLength(0));
+        }
+
+        private string RewriteContent(Match match)
+        {
+            return match.Value.Replace(&quot;/Content/&quot;, &quot;//&quot; + CdnDomain + &quot;/Content/&quot;);
+        }
+
+        private string RewriteBundles(Match match)
+        {
+            return match.Value.Replace(&quot;/bundles/&quot;, &quot;//&quot; + CdnDomain + &quot;/bundles/&quot;);
+        }
+      
+    }
+}</code></pre></noscript></div>
+</p>
+
+<p>Create an ActionFilter which passes the response stream to CdnRewriteResponse
+<div><script src='https://gist.github.com/5169331.js?file=CdnRewriteResponseFilter.cs'></script>
+<noscript><pre><code>using MVC4_CDN_Rewrite_Example.Utils;
+using System.Web.Mvc;
+
+namespace MVC4_CDN_Rewrite_Example.Filters
+{
+    public class CdnRewriteResponseFilter : ActionFilterAttribute
+    {
+        public override void OnResultExecuting(ResultExecutingContext filterContext)
+        {
+            if (filterContext.IsChildAction == false)
+            {
+                filterContext.RequestContext.HttpContext.Response.Filter =
+                    new CdnRewriteResponse(
+                        filterContext.RequestContext.HttpContext.Response.Filter,
+                        &quot;YOURCDNDOMAINHERE.com&quot;
+                     );
+            }
+        }
+    }
+}</code></pre></noscript></div>
+</p>
+
+<p>Apply the filter globally
+<div><script src='https://gist.github.com/5169331.js?file=FilterConfig.cs'></script>
+<noscript><pre><code>using MVC4_CDN_Rewrite_Example.Filters;
+using System.Web.Mvc;
+
+namespace MVC4_CDN_Rewrite_Example
+{
+    public class FilterConfig
+    {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new CdnRewriteResponseFilter());
+        }
+    }
+}</code></pre></noscript></div>
+</p>
+
+<h2>Thoughts</h2>
+
+<p>This is a brute force solution to the problem and it's not that efficient: the whole document has to be parsed to update a few tags.  However, it only seemed to add a few milliseconds to the request and the webserver is freed from serving static files (probably a saving overall).</p>
+]]></content>
+  </entry>
+  
+</feed>
