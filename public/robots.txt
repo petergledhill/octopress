@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://peteg.eu/sitemap.xml 
+Sitemap: http://www.peteg.eu/sitemap.xml 

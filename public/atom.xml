@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Peter Gledhill, Freelance Developer]]></title>
-  <link href="http://peteg.eu/atom.xml" rel="self"/>
-  <link href="http://peteg.eu/"/>
-  <updated>2013-03-15T14:51:12+00:00</updated>
-  <id>http://peteg.eu/</id>
+  <link href="http://www.peteg.eu/atom.xml" rel="self"/>
+  <link href="http://www.peteg.eu/"/>
+  <updated>2013-03-15T15:13:37+00:00</updated>
+  <id>http://www.peteg.eu/</id>
   <author>
     <name><![CDATA[Peter Gledhill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using MVC4 bundler with a Content Delivery Network]]></title>
-    <link href="http://peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/"/>
+    <link href="http://www.peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/"/>
     <updated>2013-03-15T10:46:00+00:00</updated>
-    <id>http://peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network</id>
+    <id>http://www.peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network</id>
     <content type="html"><![CDATA[<h2>Problem</h2>
 
 <p>With the MVC4 bundler; you might come to a point where you want to host your assets on a CDN.</p>

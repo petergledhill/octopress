@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: MVC4 | Peter Gledhill, Freelance Developer]]></title>
-  <link href="http://peteg.eu/blog/categories/mvc4/atom.xml" rel="self"/>
-  <link href="http://peteg.eu/"/>
-  <updated>2013-03-15T14:51:12+00:00</updated>
-  <id>http://peteg.eu/</id>
+  <link href="http://www.peteg.eu/blog/categories/mvc4/atom.xml" rel="self"/>
+  <link href="http://www.peteg.eu/"/>
+  <updated>2013-03-15T15:13:37+00:00</updated>
+  <id>http://www.peteg.eu/</id>
   <author>
     <name><![CDATA[Peter Gledhill]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using MVC4 bundler with a Content Delivery Network]]></title>
-    <link href="http://peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/"/>
+    <link href="http://www.peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/"/>
     <updated>2013-03-15T10:46:00+00:00</updated>
-    <id>http://peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network</id>
+    <id>http://www.peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network</id>
     <content type="html"><![CDATA[<h2>Problem</h2>
 
 <p>With the MVC4 bundler; you might come to a point where you want to host your assets on a CDN.</p>
@@ -59,7 +59,7 @@
 </span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;);&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="c1">// will produce a tags like so:</span>
-</span><span class='line'><span class="c1">// in development: &lt;script src=&quot;http://peteg.eu/bundles/site-scripts?v=BAhWhKO17E6GODxEzM0RwLP7V19cP-pbsCGwKj79-EI1&quot; &gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="c1">// in development: &lt;script src=&quot;http://www.peteg.eu/bundles/site-scripts?v=BAhWhKO17E6GODxEzM0RwLP7V19cP-pbsCGwKj79-EI1&quot; &gt;&lt;/script&gt;</span>
 </span><span class='line'><span class="c1">// in production : &lt;script src=&quot;http://MYCDNURL/bundles/site-scripts&quot; &gt;&lt;/script&gt;&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span>
@@ -87,7 +87,7 @@
 <span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'>// protocol left off to match the parent request<span class="nt">&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://peteg.eu//MYCDNURL/bundles/site-scripts?v=BAhWhKO17E6GODxEzM0RwLP7V19cP-pbsCGwKj79-EI1&quot;</span> <span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://www.peteg.eu//MYCDNURL/bundles/site-scripts?v=BAhWhKO17E6GODxEzM0RwLP7V19cP-pbsCGwKj79-EI1&quot;</span> <span class="nt">&gt;&lt;/script&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="nt">&lt;p&gt;</span>
