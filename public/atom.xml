@@ -4,7 +4,7 @@
   <title><![CDATA[Peter Gledhill, Freelance Developer]]></title>
   <link href="http://www.peteg.eu/atom.xml" rel="self"/>
   <link href="http://www.peteg.eu/"/>
-  <updated>2013-03-18T12:36:20+00:00</updated>
+  <updated>2013-03-18T16:58:10+00:00</updated>
   <id>http://www.peteg.eu/</id>
   <author>
     <name><![CDATA[Peter Gledhill]]></name>
@@ -12,6 +12,81 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Remove ASPNETDB.mdf for MVC sites using SimpleMembership]]></title>
+    <link href="http://www.peteg.eu/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/"/>
+    <updated>2013-03-18T16:05:00+00:00</updated>
+    <id>http://www.peteg.eu/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership</id>
+    <content type="html"><![CDATA[<p>If you create a new MVC4 application you will notice a .MDF in your App_Data folder.</p>
+
+<p>If you use a connection string to a database provider like MSSQL or MYSQL, you might wonder why this file is needed. And indeed why it comes back every time you delete it!</p>
+
+<p>The file is created by the AspNetSqlMembershipProvider and AspNetSqlRoleProvider.  However, your MVC4 application will be using SimpleMembership / SimpleRole providers which don&#8217;t require this file.</p>
+
+<p>The problem is that AspNetSqlMembershipProvider will be specified in your machine.config which is inherited by your web.config (mines found in C:\Windows\Microsoft.NET\Framework\v4.0.30319\Config).</p>
+
+<p>I think there&#8217;s a bit of magic going on here: the old providers are loaded first, then the SimpleProviders override them.</p>
+
+<h2>How to remove the ASPNETDB.mdf dependency</h2>
+
+<p>In your web.config: clear the connection strings inherited from machine.config</p>
+
+<figure class='code'><figcaption><span>Web.config  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'> <span class="nt">&lt;connectionStrings&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;clear/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&quot;DefaultConnection&quot;</span> <span class="na">connectionString=</span><span class="s">&quot;Data Source=localhost\SQLEXPRESS;Initial Catalog=test;Integrated Security=True;Persist Security Info=False;MultipleActiveResultSets=True;Packet Size=4096&quot;</span> <span class="na">providerName=</span><span class="s">&quot;System.Data.SqlClient&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/connectionStrings&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In your web.config: explicitly set the providers to be SimpleProviders and clear out any inherited providers.</p>
+
+<figure class='code'><figcaption><span>Web.config  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'> <span class="nt">&lt;system.web&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;roleManager</span> <span class="na">enabled=</span><span class="s">&quot;true&quot;</span> <span class="na">defaultProvider=</span><span class="s">&quot;SimpleRoleProvider&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;providers&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;clear</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&quot;SimpleRoleProvider&quot;</span> <span class="na">type=</span><span class="s">&quot;WebMatrix.WebData.SimpleRoleProvider, WebMatrix.WebData&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/providers&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/roleManager&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;membership</span> <span class="na">defaultProvider=</span><span class="s">&quot;SimpleMembershipProvider&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;providers&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;clear</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&quot;SimpleMembershipProvider&quot;</span> <span class="na">type=</span><span class="s">&quot;WebMatrix.WebData.SimpleMembershipProvider, WebMatrix.WebData&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/providers&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/membership&gt;</span>
+</span><span class='line'><span class="nt">&lt;/system.web&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can now remove the .mdf and .ldf files from your App_Data folder and they shouldn&#8217;t return.</p>
+
+<h3>Why do this?</h3>
+
+<p>I originally found out how to do this because I was having a problem on <a href="http://www.appharbour.com">Appharbour</a>.  Some of my user data was getting stored in this database even though I had defined a MSSQL connection string.</p>
+
+<p>However I can&#8217;t recreate the problem and this was probably not the cause of the issue.  Even so, it&#8217;s nice to be sure!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using MVC4 bundler with a Content Delivery Network]]></title>
