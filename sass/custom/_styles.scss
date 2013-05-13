@@ -1,2 +1,29 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+
+body{
+  line-height:1.5em;
+}
+
+h2, section h1 {
+  margin-bottom:0.5em;
+  margin-top:1em;
+}
+
+p, blockquote, ul, ol{
+  margin-bottom: 0.7em;
+}
+
+body > header{
+  min-height: auto;
+  text-align: left;
+}
+
+@media only screen and (max-width: 550px) {
+  body > header {
+    h1 {
+      padding-top: 0px;
+    }
+  }
+}
+

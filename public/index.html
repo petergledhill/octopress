@@ -18,17 +18,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.peteg.eu">
+  <link rel="canonical" href="http://www.peteg.eu/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Peter Gledhill, Freelance Developer" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Peter Gledhill, Freelance Developer" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
 
   
   <script type="text/javascript">
@@ -49,29 +48,9 @@
 <body   >
   <header role="banner"><hgroup>
   <h1><a href="/">Peter Gledhill, Freelance Developer</a></h1>
-  
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:www.peteg.eu" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/blog">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
   <div id="main">
     <div id="content">
       <div>
@@ -85,13 +64,13 @@
 
 <h2>What have you done?</h2>
 
-<p>Much of my work is for agencies and it&#8217;s their name which goes on the final product.  So without giving specifics I&#8217;ve:</p>
-<ul> 	
-	<li>created an interactive e-learning platform</li> 
-	<li>several educational games</li> 
-	<li>an interactive 3D box designer tool</li> 
-	<li>an online virtual office, with interactive shared whiteboard</li>
-	<li>e-commerce and booking websites</li>
+<p>Much of my work is for agencies and it&#8217;s their name which goes on the final product. So without giving specifics I&#8217;ve:</p>
+<ul>
+<li>created an interactive e-learning platform</li>
+<li>several educational games</li>
+<li>an interactive 3D box designer tool</li>
+<li>an online virtual office, with interactive shared whiteboard</li>
+<li>e-commerce and booking websites</li>
 </ul>
 <p>If you&#8217;d like to see examples then please <a href="mailto:pete@peteg.eu">drop me a line</a> and request my CV.
 
@@ -104,9 +83,6 @@
 <h2 id="Contact">Get in touch</h2>
 
 <p>If you&#8217;d like to know more, or discuss a project then please <a href="mailto:pete@peteg.eu">get in touch</a></p>
-
-
-
   
     <footer>
       
@@ -124,11 +100,11 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/">Remove ASPNETDB.mdf for MVC Sites Using SimpleMembership</a>
+        <a href="/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/">Remove ASPNETDB.mdf for MVC sites using SimpleMembership</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/">Using MVC4 Bundler With a Content Delivery Network</a>
+        <a href="/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/">Using MVC4 bundler with a Content Delivery Network</a>
       </li>
     
   </ul>
@@ -143,7 +119,7 @@
   <a href="https://github.com/petergledhill">@petergledhill</a> on GitHub
   
   <script type="text/javascript">
-    $(document).ready(function(){
+    $.domReady(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -174,8 +150,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Peter Gledhill -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  Copyright &copy; 2013 - Peter Gledhill 
 </p>
 
 </footer>
@@ -190,6 +165,8 @@
 
 
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
 </body>
 </html>
