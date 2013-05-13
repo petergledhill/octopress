@@ -106,17 +106,17 @@
 
 <p>If you use a connection string to a database provider like MSSQL or MYSQL, you might wonder why this file is needed. And indeed why it comes back every time you delete it!</p>
 
-<p>The file is created by the AspNetSqlMembershipProvider and AspNetSqlRoleProvider.  However, your MVC4 application will be using SimpleMembership / SimpleRole providers which don&#8217;t require this file.</p>
+<p>The file is created by the AspNetSqlMembershipProvider and AspNetSqlRoleProvider.  However, your MVC4 application will be using SimpleMembership / SimpleRole providers which don&rsquo;t require this file.</p>
 
 <p>The problem is that AspNetSqlMembershipProvider will be specified in your machine.config which is inherited by your web.config (mines found in C:\Windows\Microsoft.NET\Framework\v4.0.30319\Config).</p>
 
-<p>I think there&#8217;s a bit of magic going on here: the old providers are loaded first, then the SimpleProviders override them.</p>
+<p>I think there&rsquo;s a bit of magic going on here: the old providers are loaded first, then the SimpleProviders override them.</p>
 
 <h2>How to remove the ASPNETDB.mdf dependency</h2>
 
 <p>In your web.config: clear the connection strings inherited from machine.config</p>
 
-<figure class='code'><figcaption><span>Web.config  </span></figcaption>
+<figure class='code'><figcaption><span>Web.config </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -130,7 +130,7 @@
 
 <p>In your web.config: explicitly set the providers to be SimpleProviders and clear out any inherited providers.</p>
 
-<figure class='code'><figcaption><span>Web.config  </span></figcaption>
+<figure class='code'><figcaption><span>Web.config </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -162,13 +162,13 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>You can now remove the .mdf and .ldf files from your App_Data folder and they shouldn&#8217;t return.</p>
+<p>You can now remove the .mdf and .ldf files from your App_Data folder and they shouldn&rsquo;t return.</p>
 
 <h3>Why do this?</h3>
 
 <p>I originally found out how to do this because I was having a problem on <a href="http://www.appharbour.com">Appharbour</a>.  Some of my user data was getting stored in this database even though I had defined a MSSQL connection string.</p>
 
-<p>However I can&#8217;t recreate the problem and this was probably not the cause of the issue.  Even so, it&#8217;s nice to be sure!</p>
+<p>However I can&rsquo;t recreate the problem and this was probably not the cause of the issue.  Even so, it&rsquo;s nice to be sure!</p>
 </div>
 
 
@@ -234,11 +234,11 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/">Remove ASPNETDB.mdf for MVC sites using SimpleMembership</a>
+        <a href="/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/">Remove ASPNETDB.mdf for MVC Sites Using SimpleMembership</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/">Using MVC4 bundler with a Content Delivery Network</a>
+        <a href="/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/">Using MVC4 Bundler With a Content Delivery Network</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Peter Gledhill">
 
   
-  <meta name="description" content="a list of blog articles">
+  <meta name="description" content="list of blog articles">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,17 +109,17 @@
 
 <p>If you use a connection string to a database provider like MSSQL or MYSQL, you might wonder why this file is needed. And indeed why it comes back every time you delete it!</p>
 
-<p>The file is created by the AspNetSqlMembershipProvider and AspNetSqlRoleProvider.  However, your MVC4 application will be using SimpleMembership / SimpleRole providers which don&#8217;t require this file.</p>
+<p>The file is created by the AspNetSqlMembershipProvider and AspNetSqlRoleProvider.  However, your MVC4 application will be using SimpleMembership / SimpleRole providers which don&rsquo;t require this file.</p>
 
 <p>The problem is that AspNetSqlMembershipProvider will be specified in your machine.config which is inherited by your web.config (mines found in C:\Windows\Microsoft.NET\Framework\v4.0.30319\Config).</p>
 
-<p>I think there&#8217;s a bit of magic going on here: the old providers are loaded first, then the SimpleProviders override them.</p>
+<p>I think there&rsquo;s a bit of magic going on here: the old providers are loaded first, then the SimpleProviders override them.</p>
 
 <h2>How to remove the ASPNETDB.mdf dependency</h2>
 
 <p>In your web.config: clear the connection strings inherited from machine.config</p>
 
-<figure class='code'><figcaption><span>Web.config  </span></figcaption>
+<figure class='code'><figcaption><span>Web.config </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -133,7 +133,7 @@
 
 <p>In your web.config: explicitly set the providers to be SimpleProviders and clear out any inherited providers.</p>
 
-<figure class='code'><figcaption><span>Web.config  </span></figcaption>
+<figure class='code'><figcaption><span>Web.config </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -165,13 +165,13 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>You can now remove the .mdf and .ldf files from your App_Data folder and they shouldn&#8217;t return.</p>
+<p>You can now remove the .mdf and .ldf files from your App_Data folder and they shouldn&rsquo;t return.</p>
 
 <h3>Why do this?</h3>
 
 <p>I originally found out how to do this because I was having a problem on <a href="http://www.appharbour.com">Appharbour</a>.  Some of my user data was getting stored in this database even though I had defined a MSSQL connection string.</p>
 
-<p>However I can&#8217;t recreate the problem and this was probably not the cause of the issue.  Even so, it&#8217;s nice to be sure!</p>
+<p>However I can&rsquo;t recreate the problem and this was probably not the cause of the issue.  Even so, it&rsquo;s nice to be sure!</p>
 </div>
   
   
@@ -211,7 +211,7 @@
 
 <p>With the MVC4 bundler; you might come to a point where you want to host your assets on a CDN.</p>
 
-<p>Well that&#8217;s easy hey? The bundler allows you to specify a CDN url for each bundle, so you can use a local file when developing and the file from the CDN when deployed. Like so:</p>
+<p>Well that&rsquo;s easy hey? The bundler allows you to specify a CDN url for each bundle, so you can use a local file when developing and the file from the CDN when deployed. Like so:</p>
 
 <figure class='code'><figcaption><span>MVC4 Bundling and Minification </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -243,11 +243,11 @@
 
 <p>The problem with this approach is that you lose the cache busting query string which the bundler generates.  The query string is a hash of bundle contents so it changes when the content changes.</p>
 
-<p>The query string is handy to have when deploying to a CDN as it means you don&#8217;t have to manually invalidate the file on the CDN (something which I&#8217;d quite easily forget to do).</p>
+<p>The query string is handy to have when deploying to a CDN as it means you don&rsquo;t have to manually invalidate the file on the CDN (something which I&rsquo;d quite easily forget to do).</p>
 
-<p><strong>Note: Amazon CloudFront can be configured to respond to query strings. Some CDNs ignore them.  If that&#8217;s the case, then this solution won&#8217;t help.</strong></p>
+<p><strong>Note: Amazon CloudFront can be configured to respond to query strings. Some CDNs ignore them.  If that&rsquo;s the case, then this solution won&rsquo;t help.</strong></p>
 
-<p><strong>Note: I never actually upload anything to my CDN. I&#8217;m have my CDN setup to pull files from my webserver when they are first requested. This is called an &#8216;Origin Pull&#8217; setup. </strong></p>
+<p><strong>Note: I never actually upload anything to my CDN. I&rsquo;m have my CDN setup to pull files from my webserver when they are first requested. This is called an &lsquo;Origin Pull&rsquo; setup. </strong></p>
 
 <h2>Solution</h2>
 
@@ -355,7 +355,7 @@ namespace MVC4_CDN_Rewrite_Example
 
 <h2>Thoughts</h2>
 
-<p>This is a brute force solution to the problem and it&#8217;s not that efficient: the whole document has to be parsed to update a few tags.  However, it only seemed to add a few milliseconds to the request and the webserver is freed from serving static files (probably a saving overall).</p>
+<p>This is a brute force solution to the problem and it&rsquo;s not that efficient: the whole document has to be parsed to update a few tags.  However, it only seemed to add a few milliseconds to the request and the webserver is freed from serving static files (probably a saving overall).</p>
 </div>
   
   
@@ -376,11 +376,11 @@ namespace MVC4_CDN_Rewrite_Example
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/">Remove ASPNETDB.mdf for MVC sites using SimpleMembership</a>
+        <a href="/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/">Remove ASPNETDB.mdf for MVC Sites Using SimpleMembership</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/">Using MVC4 bundler with a Content Delivery Network</a>
+        <a href="/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/">Using MVC4 Bundler With a Content Delivery Network</a>
       </li>
     
   </ul>
