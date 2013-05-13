@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Javascript | Peter Gledhill, Freelance Developer]]></title>
+  <link href="http://www.peteg.eu/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://www.peteg.eu/"/>
+  <updated>2013-05-13T16:23:27+01:00</updated>
+  <id>http://www.peteg.eu/</id>
+  <author>
+    <name><![CDATA[Peter Gledhill]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[First steps into real time multiplayer with node.js]]></title>
+    <link href="http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/"/>
+    <updated>2013-05-13T15:01:00+01:00</updated>
+    <id>http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js</id>
+    <content type="html"><![CDATA[<h2>Tl;Dr</h2>
+
+<p>In my spare time I&rsquo;ve been playing around with node.js and websockets to learn more about how multiplayer games work.  This is still work in progress and very basic but for anyone interested it&rsquo;s at <a href="https://github.com/petergledhill/basic-realtime-multiplayer">https://github.com/petergledhill/basic-realtime-multiplayer</a>.</p>
+
+<h2>Story mode</h2>
+
+<p>I&rsquo;ve been wanting to write some serious javascript and am interested in how multiplayer games work.</p>
+
+<p>I was aware that they operate under an authoritative server model; the server is responsible for recording state of the game and then broadcasts it to the clients (this helps to prevent cheating).  However I had no idea how to implement this in practice.</p>
+
+<p>I came across this <a href="http://buildnewgames.com/real-time-multiplayer/">article by Sven Bergström</a> which was very helpful in explaining how it all works. It even comes with source code written in Javascript for node.js and the browser.</p>
+
+<p>Looking at the source I decided I wasn&rsquo;t going to get my head around the intricacies by hacking at it.  So I decided to have a go at writing something similar from scratch.</p>
+
+<p>The aim is to show the principles of multiplayer gaming through code, it&rsquo;s not a game itself but I hope to fully document the code and write a proper post about what I&rsquo;ve learned in the near future.</p>
+]]></content>
+  </entry>
+  
+</feed>

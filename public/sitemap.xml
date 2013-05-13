@@ -4,21 +4,27 @@
         <loc>
             http://www.peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/
         </loc>
-        <lastmod>2013-05-13T13:53:50+01:00</lastmod>
+        <lastmod>2013-05-13T16:07:42+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://www.peteg.eu/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/
         </loc>
-        <lastmod>2013-05-13T13:14:23+01:00</lastmod>
+        <lastmod>2013-05-13T16:07:42+01:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/
+        </loc>
+        <lastmod>2013-05-13T16:23:27+01:00</lastmod>
     </url>
     <url>
         <loc>http://www.peteg.eu/blog/archives/</loc>
-        <lastmod>2013-05-13T13:53:50+01:00</lastmod>
+        <lastmod>2013-05-13T16:23:27+01:00</lastmod>
     </url>
     <url>
         <loc>http://www.peteg.eu/blog/</loc>
-        <lastmod>2013-05-13T13:53:50+01:00</lastmod>
+        <lastmod>2013-05-13T16:23:27+01:00</lastmod>
     </url>
     <url>
         <loc>http://www.peteg.eu/robots.txt</loc>
@@ -26,6 +32,6 @@
     </url>
     <url>
         <loc>http://www.peteg.eu/</loc>
-        <lastmod>2013-05-13T13:53:50+01:00</lastmod>
+        <lastmod>2013-05-13T16:23:27+01:00</lastmod>
     </url>
 </urlset>
