@@ -26,7 +26,7 @@ figure.code, .gist-file, pre {
   .highlight pre { @include box-shadow(none); }
 }
 
-html .gist .gist-file {
+html .gist .gist-file { 
   margin-bottom: 1.8em;
   position: relative;
   border: none;
