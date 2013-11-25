@@ -9,7 +9,7 @@
   <meta name="author" content="Peter Gledhill">
 
   
-  <meta name="description" content="Tl;Dr In my spare time I&rsquo;ve been playing around with node.js and websockets to learn more about how multiplayer games work. This is still work &hellip;">
+  <meta name="description" content="Who? Me? Hello! I&#8217;m a freelance developer based in Newcastle-upon-Tyne, UK. I work for companies of all sizes developing websites, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -47,395 +47,53 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <img src="/images/ah_frame_transparent.png" />
   <h1><a href="/">Peter Gledhill, Freelance Developer</a></h1>
 </hgroup>
 
 </header>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article role="article">
   
+  <h2>Who? Me?</h2>
+
+<p>Hello! I&#8217;m a freelance developer based in Newcastle-upon-Tyne, UK.</p>
+
+<p>I work for companies of all sizes developing websites, interactives and games.</p>
+
+<h2>What have you done?</h2>
+
+<p>Much of my work is for agencies and it&#8217;s their name which goes on the final product. So without giving specifics I&#8217;ve:</p>
+<ul>
+<li>created an interactive e-learning platform</li>
+<li>several educational games</li>
+<li>an interactive 3D box designer tool</li>
+<li>an online virtual office, with interactive shared whiteboard</li>
+<li>e-commerce and booking websites</li>
+</ul>
+<p>If you&#8217;d like to see examples then please <a href="mailto:pete@peteg.eu">drop me a line</a> and request my CV.
+
+<h2>What languages to do you use?</h2>
+
+<p>C#, Ruby, Javascript, Actionscript, CSS and HTML.</p>
+
+<p>I started off my career as a frontend developer working mainly in Actionscript, Javascript and CSS. Over the past 5 years I&#8217;ve been heavily involved in server side development.</p>
+
+<h2 id="Contact">Get in touch</h2>
+
+<p>If you&#8217;d like to know more, or discuss a project then please <a href="mailto:pete@peteg.eu">get in touch</a></p>
   
-  
-    <article>
+    <footer>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/">First Steps Into Real Time Multiplayer With node.js</a></h1>
-    
-  </header>
-
-
-  
-    <p class="meta">
       
-
-
-
-
-
-
-
-
+    </footer>
   
+</article>
 
-
-<time datetime="2013-05-13T15:01:00+01:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
-      
-    </p>
-  
-  
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/node-dot-js/'>Node.js</a>, <a class='category' href='/blog/categories/websockets/'>Websockets</a>
-  
-</span>
-
-
-  <div class="entry-content"><h2>Tl;Dr</h2>
-
-<p>In my spare time I&rsquo;ve been playing around with node.js and websockets to learn more about how multiplayer games work.  This is still work in progress and very basic but for anyone interested it&rsquo;s at <a href="https://github.com/petergledhill/basic-realtime-multiplayer">https://github.com/petergledhill/basic-realtime-multiplayer</a>.</p>
-
-<h2>Story mode</h2>
-
-<p>I&rsquo;ve been wanting to write some serious javascript and am interested in how multiplayer games work.</p>
-
-<p>I was aware that they operate under an authoritative server model; the server is responsible for recording state of the game and then broadcasts it to the clients (this helps to prevent cheating).  However I had no idea how to implement this in practice.</p>
-
-<p>I came across this <a href="http://buildnewgames.com/real-time-multiplayer/">article by Sven Bergström</a> which was very helpful in explaining how it all works. It even comes with source code written in Javascript for node.js and the browser.</p>
-
-<p>Looking at the source I decided I wasn&rsquo;t going to get my head around the intricacies by hacking at it.  So I decided to have a go at writing something similar from scratch.</p>
-
-<p>The aim is to show the principles of multiplayer gaming through code, it&rsquo;s not a game itself but I hope to fully document the code and write a proper post about what I&rsquo;ve learned in the near future.</p>
 </div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/">Remove ASPNETDB.mdf for MVC Sites Using SimpleMembership</a></h1>
-    
-  </header>
-
-
-  
-    <p class="meta">
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-18T16:05:00+00:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
-      
-    </p>
-  
-  
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/c-number/'>C#</a>, <a class='category' href='/blog/categories/mvc4/'>MVC4</a>
-  
-</span>
-
-
-  <div class="entry-content"><p>If you create a new MVC4 application you will notice a .MDF in your App_Data folder.</p>
-
-<p>If you use a connection string to a database provider like MSSQL or MYSQL, you might wonder why this file is needed. And indeed why it comes back every time you delete it!</p>
-
-<p>The file is created by the AspNetSqlMembershipProvider and AspNetSqlRoleProvider.  However, your MVC4 application will be using SimpleMembership / SimpleRole providers which don&rsquo;t require this file.</p>
-
-<p>The problem is that AspNetSqlMembershipProvider will be specified in your machine.config which is inherited by your web.config (mines found in C:\Windows\Microsoft.NET\Framework\v4.0.30319\Config).</p>
-
-<p>I think there&rsquo;s a bit of magic going on here: the old providers are loaded first, then the SimpleProviders override them.</p>
-
-<h2>How to remove the ASPNETDB.mdf dependency</h2>
-
-<p>In your web.config: clear the connection strings inherited from machine.config</p>
-
-<figure class='code'><figcaption><span>Web.config </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'> <span class="nt">&lt;connectionStrings&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;clear/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&quot;DefaultConnection&quot;</span> <span class="na">connectionString=</span><span class="s">&quot;Data Source=localhost\SQLEXPRESS;Initial Catalog=test;Integrated Security=True;Persist Security Info=False;MultipleActiveResultSets=True;Packet Size=4096&quot;</span> <span class="na">providerName=</span><span class="s">&quot;System.Data.SqlClient&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/connectionStrings&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In your web.config: explicitly set the providers to be SimpleProviders and clear out any inherited providers.</p>
-
-<figure class='code'><figcaption><span>Web.config </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'> <span class="nt">&lt;system.web&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;roleManager</span> <span class="na">enabled=</span><span class="s">&quot;true&quot;</span> <span class="na">defaultProvider=</span><span class="s">&quot;SimpleRoleProvider&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;providers&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;clear</span> <span class="nt">/&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&quot;SimpleRoleProvider&quot;</span> <span class="na">type=</span><span class="s">&quot;WebMatrix.WebData.SimpleRoleProvider, WebMatrix.WebData&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/providers&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/roleManager&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;membership</span> <span class="na">defaultProvider=</span><span class="s">&quot;SimpleMembershipProvider&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;providers&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;clear</span> <span class="nt">/&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&quot;SimpleMembershipProvider&quot;</span> <span class="na">type=</span><span class="s">&quot;WebMatrix.WebData.SimpleMembershipProvider, WebMatrix.WebData&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/providers&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/membership&gt;</span>
-</span><span class='line'><span class="nt">&lt;/system.web&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can now remove the .mdf and .ldf files from your App_Data folder and they shouldn&rsquo;t return.</p>
-
-<h3>Why do this?</h3>
-
-<p>I originally found out how to do this because I was having a problem on <a href="http://www.appharbour.com">Appharbour</a>.  Some of my user data was getting stored in this database even though I had defined a MSSQL connection string.</p>
-
-<p>However I can&rsquo;t recreate the problem and this was probably not the cause of the issue.  Even so, it&rsquo;s nice to be sure!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/">Using MVC4 Bundler With a Content Delivery Network</a></h1>
-    
-  </header>
-
-
-  
-    <p class="meta">
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-15T10:46:00+00:00" pubdate data-updated="true">Mar 15<span>th</span>, 2013</time>
-      
-    </p>
-  
-  
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/c-number/'>C#</a>, <a class='category' href='/blog/categories/mvc4/'>MVC4</a>
-  
-</span>
-
-
-  <div class="entry-content"><h2>Problem</h2>
-
-<p>With the MVC4 bundler; you might come to a point where you want to host your assets on a CDN.</p>
-
-<p>Well that&rsquo;s easy hey? The bundler allows you to specify a CDN url for each bundle, so you can use a local file when developing and the file from the CDN when deployed. Like so:</p>
-
-<figure class='code'><figcaption><span>MVC4 Bundling and Minification </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">bundles</span><span class="p">.</span><span class="n">UseCdn</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>   <span class="c1">//enable CDN support</span>
-</span><span class='line'><span class="n">bundles</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span>
-</span><span class='line'>  <span class="k">new</span> <span class="nf">ScriptBundle</span><span class="p">(</span><span class="s">&quot;~/bundles/site-scripts&quot;</span><span class="p">,</span> <span class="s">&quot;http://MYCDNURL/bundles/site-scripts&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">.</span><span class="n">Include</span><span class="p">(</span>
-</span><span class='line'>      <span class="s">&quot;~/Scripts/sitejs.js&quot;</span><span class="p">,</span>
-</span><span class='line'>      <span class="s">&quot;~/Scripts/sitejs2.js&quot;</span>
-</span><span class='line'>    <span class="p">)</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// will produce a tags like so:</span>
-</span><span class='line'><span class="c1">// in development: &lt;script src=&quot;/bundles/site-scripts?v=BAhWhKO17E6GODxEzM0RwLP7V19cP-pbsCGwKj79-EI1&quot; &gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="c1">// in production : &lt;script src=&quot;http://MYCDNURL/bundles/site-scripts&quot; &gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The problem with this approach is that you lose the cache busting query string which the bundler generates.  The query string is a hash of bundle contents so it changes when the content changes.</p>
-
-<p>The query string is handy to have when deploying to a CDN as it means you don&rsquo;t have to manually invalidate the file on the CDN (something which I&rsquo;d quite easily forget to do).</p>
-
-<p><strong>Note: Amazon CloudFront can be configured to respond to query strings. Some CDNs ignore them.  If that&rsquo;s the case, then this solution won&rsquo;t help.</strong></p>
-
-<p><strong>Note: I never actually upload anything to my CDN. I&rsquo;m have my CDN setup to pull files from my webserver when they are first requested. This is called an &lsquo;Origin Pull&rsquo; setup. </strong></p>
-
-<h2>Solution</h2>
-
-<p>This solution is taken directly form this <a href="http://stackoverflow.com/a/6892794" title="Put images on CDN, using MVC3 on IIS7">stackoverflow answer by Mike Richards</a>.</p>
-
-<p>The solution uses an ActionFilter to rewrite the response before it is sent back to the client.  You should end up with scripts / css tags like so:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>// protocol left off to match the parent request
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//MYCDNURL/bundles/site-scripts?v=BAhWhKO17E6GODxEzM0RwLP7V19cP-pbsCGwKj79-EI1&quot;</span> <span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>First create a custom MemoryStream class to rewrite the stream:</p>
-
-<div><script src='https://gist.github.com/5169331.js?file=CdnRewriteResponse.cs'></script>
-<noscript><pre><code>using System;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace MVC4_CDN_Rewrite_Example.Utils
-{
-    public class CdnRewriteResponse : MemoryStream
-    {
-        private Stream Stream { get; set; }
-        private string CdnDomain { get; set; }
-
-        public CdnRewriteResponse(Stream stream, string cdnDomain)
-        {
-            Stream = stream;
-            CdnDomain = cdnDomain;
-        }
-
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            var data = new byte[count];
-            Buffer.BlockCopy(buffer, offset, data, 0, count);
-            string html = Encoding.Default.GetString(buffer);
-
-            html = Regex.Replace(html, &quot;=\&quot;/Content/([^\&quot;]+)\&quot;&quot;, RewriteContent);
-            html = Regex.Replace(html, &quot;=\&quot;/bundles/([^\&quot;]+)\&quot;&quot;, RewriteBundles);
-
-            byte[] outData = Encoding.Default.GetBytes(html);
-            Stream.Write(outData, 0, outData.GetLength(0));
-        }
-
-        private string RewriteContent(Match match)
-        {
-            return match.Value.Replace(&quot;/Content/&quot;, &quot;//&quot; + CdnDomain + &quot;/Content/&quot;);
-        }
-
-        private string RewriteBundles(Match match)
-        {
-            return match.Value.Replace(&quot;/bundles/&quot;, &quot;//&quot; + CdnDomain + &quot;/bundles/&quot;);
-        }
-      
-    }
-}</code></pre></noscript></div>
-
-
-<p>Create an ActionFilter which passes the response stream to CdnRewriteResponse</p>
-
-<div><script src='https://gist.github.com/5169331.js?file=CdnRewriteResponseFilter.cs'></script>
-<noscript><pre><code>using MVC4_CDN_Rewrite_Example.Utils;
-using System.Web.Mvc;
-
-namespace MVC4_CDN_Rewrite_Example.Filters
-{
-    public class CdnRewriteResponseFilter : ActionFilterAttribute
-    {
-        public override void OnResultExecuting(ResultExecutingContext filterContext)
-        {
-            // ignore child actions. Only the parent request can be rewritten
-            if (filterContext.IsChildAction == false)
-            {
-                filterContext.RequestContext.HttpContext.Response.Filter =
-                    new CdnRewriteResponse(
-                        filterContext.RequestContext.HttpContext.Response.Filter,
-                        &quot;YOURCDNDOMAINHERE.com&quot;
-                     );
-            }
-        }
-    }
-}</code></pre></noscript></div>
-
-
-<p>Apply the filter globally</p>
-
-<div><script src='https://gist.github.com/5169331.js?file=FilterConfig.cs'></script>
-<noscript><pre><code>using MVC4_CDN_Rewrite_Example.Filters;
-using System.Web.Mvc;
-
-namespace MVC4_CDN_Rewrite_Example
-{
-    public class FilterConfig
-    {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
-            filters.Add(new CdnRewriteResponseFilter());
-        }
-    }
-}</code></pre></noscript></div>
-
-
-<h2>Thoughts</h2>
-
-<p>This is a brute force solution to the problem and it&rsquo;s not that efficient: the whole document has to be parsed to update a few tags.  However, it only seemed to add a few milliseconds to the request and the webserver is freed from serving static files (probably a saving overall).</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
-  
-    <form action="http://google.com/search" method="get">
-      <fieldset role="search">
-        <input type="hidden" name="q" value="site:www.peteg.eu" />
-        <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-      </fieldset>
-    </form>
-  
   
     <section>
   <h1>Recent Posts</h1>
@@ -459,7 +117,7 @@ namespace MVC4_CDN_Rewrite_Example
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/petergledhill">@petergledhill</a> on GitHub
@@ -492,28 +150,15 @@ namespace MVC4_CDN_Rewrite_Example
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Peter Gledhill -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  Copyright &copy; 2013 - Peter Gledhill 
 </p>
 
 </footer>
   
-
-<script type="text/javascript">
-      var disqus_shortname = 'petegeu';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
 
 
 
@@ -526,7 +171,7 @@ namespace MVC4_CDN_Rewrite_Example
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="/javascripts/aharris.js"></script>
+
 
 </body>
 </html>

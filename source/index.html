@@ -1,37 +1,33 @@
 ---
-layout: default
+layout: page
+comments: false
+sharing: false
+footer: true
 ---
+<h2>Who? Me?</h2>
 
-<div class="blog-index">
-  {% assign index = true %}
-  {% for post in paginator.posts %}
-  {% assign content = post.content %}
-    <article>
-      {% include article.html %}
-    </article>
-  {% endfor %}
-  <div class="pagination">
-    {% if paginator.next_page %}
-      <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
-    {% endif %}
-    <a href="/blog/archives">Blog Archives</a>
-    {% if paginator.previous_page %}
-    <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
-    {% endif %}
-  </div>
-</div>
-<aside class="sidebar">
-  {% if site.simple_search %}
-    <form action="{{ site.simple_search }}" method="get">
-      <fieldset role="search">
-        <input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}" />
-        <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-      </fieldset>
-    </form>
-  {% endif %}
-  {% if site.blog_index_asides.size %}
-    {% include_array blog_index_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
-</aside>
+<p>Hello! I'm a freelance developer based in Newcastle-upon-Tyne, UK.</p>
+
+<p>I work for companies of all sizes developing websites, interactives and games.</p>
+
+<h2>What have you done?</h2>
+
+<p>Much of my work is for agencies and it's their name which goes on the final product. So without giving specifics I've:</p>
+<ul>
+<li>created an interactive e-learning platform</li>
+<li>several educational games</li>
+<li>an interactive 3D box designer tool</li>
+<li>an online virtual office, with interactive shared whiteboard</li>
+<li>e-commerce and booking websites</li>
+</ul>
+<p>If you'd like to see examples then please <a href="mailto:pete@peteg.eu">drop me a line</a> and request my CV.
+
+<h2>What languages to do you use?</h2>
+
+<p>C#, Ruby, Javascript, Actionscript, CSS and HTML.</p>
+
+<p>I started off my career as a frontend developer working mainly in Actionscript, Javascript and CSS. Over the past 5 years I've been heavily involved in server side development.</p>
+
+<h2 id="Contact">Get in touch</h2>
+
+<p>If you'd like to know more, or discuss a project then please <a href="mailto:pete@peteg.eu">get in touch</a></p>
