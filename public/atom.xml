@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
+
   <title><![CDATA[Peter Gledhill, Freelance Developer]]></title>
   <link href="http://www.peteg.eu/atom.xml" rel="self"/>
   <link href="http://www.peteg.eu/"/>
-  <updated>2013-11-25T11:23:09+00:00</updated>
+  <updated>2013-11-25T11:29:36+00:00</updated>
   <id>http://www.peteg.eu/</id>
   <author>
     <name><![CDATA[Peter Gledhill]]></name>
@@ -13,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[First steps into real time multiplayer with node.js]]></title>
+    <title type="html"><![CDATA[First Steps Into Real Time Multiplayer With node.js]]></title>
     <link href="http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/"/>
     <updated>2013-05-13T15:01:00+01:00</updated>
     <id>http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js</id>
@@ -36,7 +37,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Remove ASPNETDB.mdf for MVC sites using SimpleMembership]]></title>
+    <title type="html"><![CDATA[Remove ASPNETDB.mdf for MVC Sites Using SimpleMembership]]></title>
     <link href="http://www.peteg.eu/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/"/>
     <updated>2013-03-18T16:05:00+00:00</updated>
     <id>http://www.peteg.eu/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership</id>
@@ -55,7 +56,7 @@
 <p>In your web.config: clear the connection strings inherited from machine.config</p>
 
 <figure class='code'><figcaption><span>Web.config </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -69,7 +70,7 @@
 <p>In your web.config: explicitly set the providers to be SimpleProviders and clear out any inherited providers.</p>
 
 <figure class='code'><figcaption><span>Web.config </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -111,7 +112,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Using MVC4 bundler with a Content Delivery Network]]></title>
+    <title type="html"><![CDATA[Using MVC4 Bundler With a Content Delivery Network]]></title>
     <link href="http://www.peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network/"/>
     <updated>2013-03-15T10:46:00+00:00</updated>
     <id>http://www.peteg.eu/blog/2013/03/15/using-mvc4-bundler-with-a-content-delivery-network</id>
@@ -122,7 +123,7 @@
 <p>Well that&rsquo;s easy hey? The bundler allows you to specify a CDN url for each bundle, so you can use a local file when developing and the file from the CDN when deployed. Like so:</p>
 
 <figure class='code'><figcaption><span>MVC4 Bundling and Minification </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -163,7 +164,7 @@
 
 <p>The solution uses an ActionFilter to rewrite the response before it is sent back to the client.  You should end up with scripts / css tags like so:</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'>// protocol left off to match the parent request
 </span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//MYCDNURL/bundles/site-scripts?v=BAhWhKO17E6GODxEzM0RwLP7V19cP-pbsCGwKj79-EI1&quot;</span> <span class="nt">&gt;&lt;/script&gt;</span>

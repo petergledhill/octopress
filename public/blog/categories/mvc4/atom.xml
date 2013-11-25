@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MVC4 | Peter Gledhill, Freelance Developer]]></title>
   <link href="http://www.peteg.eu/blog/categories/mvc4/atom.xml" rel="self"/>
   <link href="http://www.peteg.eu/"/>
-  <updated>2013-11-25T11:23:09+00:00</updated>
+  <updated>2013-11-25T11:29:36+00:00</updated>
   <id>http://www.peteg.eu/</id>
   <author>
     <name><![CDATA[Peter Gledhill]]></name>
@@ -33,7 +33,7 @@
 <p>In your web.config: clear the connection strings inherited from machine.config</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Web.config </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -52,7 +52,7 @@
 <p>In your web.config: explicitly set the providers to be SimpleProviders and clear out any inherited providers.</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Web.config </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -110,7 +110,7 @@
 <p>Well that&rsquo;s easy hey? The bundler allows you to specify a CDN url for each bundle, so you can use a local file when developing and the file from the CDN when deployed. Like so:</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>MVC4 Bundling and Minification </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -164,7 +164,7 @@
 
 <p>The solution uses an ActionFilter to rewrite the response before it is sent back to the client.  You should end up with scripts / css tags like so:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
