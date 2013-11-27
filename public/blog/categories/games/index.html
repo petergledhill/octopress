@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>First steps into real time multiplayer with node.js - Peter Gledhill, Freelance Developer</title>
+  <title>Category: Games - Peter Gledhill, Freelance Developer</title>
   <meta name="author" content="Peter Gledhill">
 
   
-  <meta name="description" content="Tl;Dr In my spare time I&rsquo;ve been playing around with node.js and websockets to learn more about how multiplayer games work. This is still work &hellip;">
+  <meta name="description" content="Category: Games">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/">
+  <link rel="canonical" href="http://www.peteg.eublog/categories/games/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -54,87 +54,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">First Steps Into Real Time Multiplayer With node.js</h1>
+    <h1 class="entry-title">Category: Games</h1>
     
   </header>
-
-
-
-
-<span class="categories">
   
-    <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/node-dot-js/'>Node.js</a>, <a class='category' href='/blog/categories/websockets/'>Websockets</a>
-  
-</span>
-
-
-<div class="entry-content"><h2>Tl;Dr</h2>
-
-<p>In my spare time I&rsquo;ve been playing around with node.js and websockets to learn more about how multiplayer games work.  This is still work in progress and very basic but for anyone interested it&rsquo;s at <a href="https://github.com/petergledhill/basic-realtime-multiplayer">https://github.com/petergledhill/basic-realtime-multiplayer</a>.</p>
-
-<h2>Story mode</h2>
-
-<p>I&rsquo;ve been wanting to write some serious javascript and am interested in how multiplayer games work.</p>
-
-<p>I was aware that they operate under an authoritative server model; the server is responsible for recording state of the game and then broadcasts it to the clients (this helps to prevent cheating).  However I had no idea how to implement this in practice.</p>
-
-<p>I came across this <a href="http://buildnewgames.com/real-time-multiplayer/">article by Sven Bergström</a> which was very helpful in explaining how it all works. It even comes with source code written in Javascript for node.js and the browser.</p>
-
-<p>Looking at the source I decided I wasn&rsquo;t going to get my head around the intricacies by hacking at it.  So I decided to have a go at writing something similar from scratch.</p>
-
-<p>The aim is to show the principles of multiplayer gaming through code, it&rsquo;s not a game itself but I hope to fully document the code and write a proper post about what I&rsquo;ve learned in the near future.</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Peter Gledhill</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2013</h2>
+
+<article>
+  
+<h1><a href="/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement/">Basics of multiplayer : local movement</a></h1>
+<time datetime="2013-11-27T13:03:58+00:00" pubdate><span class='month'>Nov</span> <span class='day'>27</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories"><a class='category' href='/blog/categories/games/'>Games</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/node-dot-js/'>Node.js</a>, <a class='category' href='/blog/categories/websockets/'>Websockets</a></span>
+</footer>
 
 
-<time datetime="2013-05-13T15:01:00+01:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
-    </p>
-    
-      <div class="sharing">
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/" title="Previous Post: Remove ASPNETDB.mdf for MVC sites using SimpleMembership">&laquo; Remove ASPNETDB.mdf for MVC sites using SimpleMembership</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement/" title="Next Post: Basics of multiplayer : local movement">Basics of multiplayer : local movement &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -213,10 +162,7 @@
       var disqus_shortname = 'petegeu';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/';
-        var disqus_url = 'http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>First steps into real time multiplayer with node.js - Peter Gledhill, Freelance Developer</title>
+  <title>Basics of multiplayer : local movement - Peter Gledhill, Freelance Developer</title>
   <meta name="author" content="Peter Gledhill">
 
   
-  <meta name="description" content="Tl;Dr In my spare time I&rsquo;ve been playing around with node.js and websockets to learn more about how multiplayer games work. This is still work &hellip;">
+  <meta name="description" content="When playing a multiplayer game you generally give instructions to your avatar through some input device and see the results immediately on screen, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/">
+  <link rel="canonical" href="http://www.peteg.eu/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -58,7 +58,7 @@
   
   <header>
     
-      <h1 class="entry-title">First Steps Into Real Time Multiplayer With node.js</h1>
+      <h1 class="entry-title">Basics of Multiplayer : Local Movement</h1>
     
   </header>
 
@@ -67,26 +67,48 @@
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/node-dot-js/'>Node.js</a>, <a class='category' href='/blog/categories/websockets/'>Websockets</a>
+    <a class='category' href='/blog/categories/games/'>Games</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/node-dot-js/'>Node.js</a>, <a class='category' href='/blog/categories/websockets/'>Websockets</a>
   
 </span>
 
 
-<div class="entry-content"><h2>Tl;Dr</h2>
+<div class="entry-content"><p>When playing a multiplayer game you generally give instructions to your avatar through some input device and see the results immediately on screen, we&rsquo;ll call that &lsquo;local movement&rsquo;.  You can also see the movement of other players avatars, we&rsquo;ll call that &lsquo;remote movement&rsquo;. These two types of movement (local and remote) are modelled very differently.  This article focuses on &lsquo;local movement&rsquo;.</p>
 
-<p>In my spare time I&rsquo;ve been playing around with node.js and websockets to learn more about how multiplayer games work.  This is still work in progress and very basic but for anyone interested it&rsquo;s at <a href="https://github.com/petergledhill/basic-realtime-multiplayer">https://github.com/petergledhill/basic-realtime-multiplayer</a>.</p>
+<h2>The Basic idea</h2>
 
-<h2>Story mode</h2>
+<h3>On the client</h3>
 
-<p>I&rsquo;ve been wanting to write some serious javascript and am interested in how multiplayer games work.</p>
+<ol>
+<li>On the update loop &ndash; your keypresses are captured and recorded as a &lsquo;move&rsquo;.</li>
+<li>The result of the move is calculated and the position of your avatar is updated.</li>
+<li>The move is stored along with the time it was created.</li>
+<li>The move is sent to the server along with the result of the move.</li>
+</ol>
 
-<p>I was aware that they operate under an authoritative server model; the server is responsible for recording state of the game and then broadcasts it to the clients (this helps to prevent cheating).  However I had no idea how to implement this in practice.</p>
 
-<p>I came across this <a href="http://buildnewgames.com/real-time-multiplayer/">article by Sven Bergström</a> which was very helpful in explaining how it all works. It even comes with source code written in Javascript for node.js and the browser.</p>
+<h3>On the server</h3>
 
-<p>Looking at the source I decided I wasn&rsquo;t going to get my head around the intricacies by hacking at it.  So I decided to have a go at writing something similar from scratch.</p>
+<ol>
+<li>The server received the move and immediately calculates the result of the move on the player.</li>
+<li>The result is checked against the result which was sent by the client.
 
-<p>The aim is to show the principles of multiplayer gaming through code, it&rsquo;s not a game itself but I hope to fully document the code and write a proper post about what I&rsquo;ve learned in the near future.</p>
+<ol>
+<li>If the results match then the server sends a message to the client to say the result was good.</li>
+<li>If the server disagrees about the result then it informs the client of what the result should have been.</li>
+</ol>
+</li>
+</ol>
+
+
+<h3>Back on the client</h3>
+
+<p>Note: While the server was calculating the result, the client will have generated new moves and which it will have sent to the server.</p>
+
+<ol>
+<li>If a good move is acknowledged then no action is required.</li>
+<li>If a move is corrected then update the position based on the result from the server.  Any moves which have occurred since this corrected move must be calculated again.</li>
+</ol>
+
 </div>
 
 
@@ -109,7 +131,7 @@
   
 
 
-<time datetime="2013-05-13T15:01:00+01:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
+<time datetime="2013-11-27T13:03:58+00:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
     </p>
     
       <div class="sharing">
@@ -121,10 +143,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/03/18/remove-aspnetdb-dot-mdf-for-mvc-sites-using-simplemembership/" title="Previous Post: Remove ASPNETDB.mdf for MVC sites using SimpleMembership">&laquo; Remove ASPNETDB.mdf for MVC sites using SimpleMembership</a>
+        <a class="basic-alignment left" href="/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/" title="Previous Post: First steps into real time multiplayer with node.js">&laquo; First steps into real time multiplayer with node.js</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement/" title="Next Post: Basics of multiplayer : local movement">Basics of multiplayer : local movement &raquo;</a>
       
     </p>
   </footer>
@@ -214,8 +234,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/';
-        var disqus_url = 'http://www.peteg.eu/blog/2013/05/13/first-steps-into-real-time-multiplayer-with-node-dot-js/';
+        var disqus_identifier = 'http://www.peteg.eu/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement/';
+        var disqus_url = 'http://www.peteg.eu/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement/';
         var disqus_script = 'embed.js';
       
     (function () {

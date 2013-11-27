@@ -3,7 +3,7 @@
   <title><![CDATA[Peter Gledhill, Freelance Developer]]></title>
   <link href="http://www.peteg.eu/atom.xml" rel="self"/>
   <link href="http://www.peteg.eu/"/>
-  <updated>2013-11-25T12:39:23+00:00</updated>
+  <updated>2013-11-27T14:20:38+00:00</updated>
   <id>http://www.peteg.eu/</id>
   <author>
     <name><![CDATA[Peter Gledhill]]></name>
@@ -11,6 +11,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Basics of multiplayer : local movement]]></title>
+    <link href="http://www.peteg.eu/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement/"/>
+    <updated>2013-11-27T13:03:58+00:00</updated>
+    <id>http://www.peteg.eu/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement</id>
+    <content type="html"><![CDATA[<p>When playing a multiplayer game you generally give instructions to your avatar through some input device and see the results immediately on screen, we&rsquo;ll call that &lsquo;local movement&rsquo;.  You can also see the movement of other players avatars, we&rsquo;ll call that &lsquo;remote movement&rsquo;. These two types of movement (local and remote) are modelled very differently.  This article focuses on &lsquo;local movement&rsquo;.</p>
+
+<h2>The Basic idea</h2>
+
+<h3>On the client</h3>
+
+<ol>
+<li>On the update loop &ndash; your keypresses are captured and recorded as a &lsquo;move&rsquo;.</li>
+<li>The result of the move is calculated and the position of your avatar is updated.</li>
+<li>The move is stored along with the time it was created.</li>
+<li>The move is sent to the server along with the result of the move.</li>
+</ol>
+
+
+<h3>On the server</h3>
+
+<ol>
+<li>The server received the move and immediately calculates the result of the move on the player.</li>
+<li>The result is checked against the result which was sent by the client.
+
+<ol>
+<li>If the results match then the server sends a message to the client to say the result was good.</li>
+<li>If the server disagrees about the result then it informs the client of what the result should have been.</li>
+</ol>
+</li>
+</ol>
+
+
+<h3>Back on the client</h3>
+
+<p>Note: While the server was calculating the result, the client will have generated new moves and which it will have sent to the server.</p>
+
+<ol>
+<li>If a good move is acknowledged then no action is required.</li>
+<li>If a move is corrected then update the position based on the result from the server.  Any moves which have occurred since this corrected move must be calculated again.</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[First steps into real time multiplayer with node.js]]></title>
