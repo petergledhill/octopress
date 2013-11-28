@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Games | Peter Gledhill, Freelance Developer]]></title>
   <link href="http://www.peteg.eu/blog/categories/games/atom.xml" rel="self"/>
   <link href="http://www.peteg.eu/"/>
-  <updated>2013-11-27T14:20:38+00:00</updated>
+  <updated>2013-11-28T13:34:22+00:00</updated>
   <id>http://www.peteg.eu/</id>
   <author>
     <name><![CDATA[Peter Gledhill]]></name>
@@ -14,18 +14,50 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Basics of multiplayer : local movement]]></title>
-    <link href="http://www.peteg.eu/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement/"/>
-    <updated>2013-11-27T13:03:58+00:00</updated>
-    <id>http://www.peteg.eu/blog/2013/11/27/basics-of-multiplayer-in-nodejs-your-movement</id>
-    <content type="html"><![CDATA[<p>When playing a multiplayer game you generally give instructions to your avatar through some input device and see the results immediately on screen, we&rsquo;ll call that &lsquo;local movement&rsquo;.  You can also see the movement of other players avatars, we&rsquo;ll call that &lsquo;remote movement&rsquo;. These two types of movement (local and remote) are modelled very differently.  This article focuses on &lsquo;local movement&rsquo;.</p>
+    <title type="html"><![CDATA[Basics of Multi-player in Node.js : Part 1]]></title>
+    <link href="http://www.peteg.eu/blog/2013/11/28/basics-of-multiplayer-in-nodejs-your-movement/"/>
+    <updated>2013-11-28T13:03:58+00:00</updated>
+    <id>http://www.peteg.eu/blog/2013/11/28/basics-of-multiplayer-in-nodejs-your-movement</id>
+    <content type="html"><![CDATA[<h2>Introduction</h2>
 
-<h2>The Basic idea</h2>
+<p>The challenge for multi-player gaming is to ensure that all players see the same game state at roughly the same time. The game must also be playable on a slow connection and cheating should not be trivial.</p>
+
+<p>In many multi-player games this is achieved by having a server which all clients connect to. The server maintains the correct game state and updates all the clients to keep them in sync.  This is called a client with authoritative server model and is generally used for first person shooters (Real time strategy games often use a peer-to-peer model with the <a href="http://en.wikipedia.org/wiki/Lockstep_protocol">lockstep protocol</a>).</p>
+
+<h3>Dumb client</h3>
+
+<p>Doom was one of the first games to use this model and supported up to 4 players at once.  In Dooms networking model the client computers are dumb, the client feeds instructions to the server and the server responds with the new game state.</p>
+
+<p>For example the player presses the right arrow, the instruction is sent to the server and the server sends back a message saying &lsquo;your position is now X,Y&rsquo;.  This method works well when the game is played over a local area network (LAN) as there is little delay between the client and the server.</p>
+
+<p>Over the Internet this method doesn&rsquo;t work.  By the time the client sends the message to the server and receives back the new state several hundred milliseconds may have passed. This results in very jerky movement.</p>
+
+<h2>Client-side prediction</h2>
+
+<p>The solution to this is to calculate the result of the move both locally and on the server. When a key is pressed, the client calculates the result locally and updates the position immediately.  The move and the client result are then sent to the server.</p>
+
+<p>The server recalculates the result and either acknowledges the clients good move or sends a correction.  This way the client can react immediately to input and the server can maintain an authoritative state &ndash; the best of both worlds.</p>
+
+<blockquote><p>A move would be an action such as &lsquo;move right&rsquo;. In a 2D game the result of this move might be a new position like x:10, y:0.  It&rsquo;s important to note that the move is a relative action and the result is an absolute.</p></blockquote>
+
+<p>There are a few things to mention with this model:</p>
+
+<h3>Determinism</h3>
+
+<p>The game logic must be <a href="http://en.wikipedia.org/wiki/Deterministic_system">deterministic</a>.  This means each time we put in the same input we must get the same result back; there can not be a random element to the logic. If there was a random element then the client and server would often disagree about the result and the client would constantly need correcting, and the client-side prediction would have no benefit.</p>
+
+<h3>Snapping</h3>
+
+<p>After the client sends a move to the server it will continue to generate new moves.  By the time the client receives a response from the server several hundred milliseconds will have past and the client will be receiving a correction / confirmation of a move which happened in the past.  In the case that a correction is required this causes a problem.  If we update to the servers position the client will appear to jump back in time or &lsquo;snap&rsquo; to a new location.</p>
+
+<p>To get around this problem the client can store all the moves which are made, when a correction is made to a move in the past we can then replay all future moves.  This works because the moves a relative actions such as &lsquo;move left&rsquo; and so can be reapplied from the corrected position.</p>
+
+<h2>Breakdown</h2>
 
 <h3>On the client</h3>
 
 <ol>
-<li>On the update loop &ndash; your keypresses are captured and recorded as a &lsquo;move&rsquo;.</li>
+<li>On the update loop &ndash; your keypresses are captured and recorded as a &lsquo;move&rsquo;. e.g. &lsquo;move left&rsquo; .</li>
 <li>The result of the move is calculated and the position of your avatar is updated.</li>
 <li>The move is stored along with the time it was created.</li>
 <li>The move is sent to the server along with the result of the move.</li>
@@ -35,8 +67,8 @@
 <h3>On the server</h3>
 
 <ol>
-<li>The server received the move and immediately calculates the result of the move on the player.</li>
-<li>The result is checked against the result which was sent by the client.
+<li>The server receives the move and immediately calculates the result of the move on the avatar.</li>
+<li>The result is checked against the clients result.
 
 <ol>
 <li>If the results match then the server sends a message to the client to say the result was good.</li>
@@ -52,7 +84,7 @@
 
 <ol>
 <li>If a good move is acknowledged then no action is required.</li>
-<li>If a move is corrected then update the position based on the result from the server.  Any moves which have occurred since this corrected move must be calculated again.</li>
+<li>If a move is corrected then update the position based on the result from the server.  Any moves which have occurred since this corrected move must be calculated again on the client.</li>
 </ol>
 
 ]]></content>
