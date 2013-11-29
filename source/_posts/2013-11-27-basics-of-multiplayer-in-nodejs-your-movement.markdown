@@ -58,3 +58,69 @@ Note: While the server was calculating the result, the client will have generate
 
 1. If a good move is acknowledged then no action is required.
 2. If a move is corrected then update the position based on the result from the server.  Any moves which have occurred since this corrected move must be calculated again on the client.
+
+
+{% codeblock game-client.js lang:javascript %}
+// this function is called roughly every 15 ms
+update: function(){
+
+  // get current client time
+  var t = this.time();
+
+  // get move based on inputs
+  // this will be an array of direction to move such as ['l', 'u'] for left and up
+  var move = input.get_move();
+
+  // save move
+  this.me.moves.add(move, t);
+
+  // apply the move locally
+  // we use a fixed delta time because we have physics based movement
+  // physics delta is hardcoded to 0.015 - every 15 ms
+  this.move_autonomous( move, this.data.physics_delta );
+
+  // inform the server of our move
+  this.server_move(t, move, this.me.accel, this.me.pos);
+},
+{% endcodeblock %}
+
+{% codeblock game-server.js lang:javascript %}
+
+server_move: function(client_id, player, time, move, client_accel, client_pos){
+  player.controller.apply_move(move, this.data.physics_delta);
+
+  if(player.pos.equals(client_pos)){
+    this.transport.good_move( client_id, time );
+  }
+  else{
+    // this be passed to move_corrected in game-client
+    this.transport.ajust_move(
+      client_id,
+      {
+        t: time,
+        p: player.pos.toObject(),
+        v: player.vel.toObject()
+      }
+    );
+  }
+},
+
+{% endcodeblock %}
+
+{% codeblock game-client.js lang:javascript %}
+move_corrected: function(time, pos, vel){
+  // update position / velocity to match server values for this move
+  this.me.pos.set( pos );
+  this.me.vel.set( vel );
+  this.me.moves.clear_from_time( time );
+
+  // rerun all moves which were made after this one        
+  var moves = this.me.moves.all();
+  var l = moves.length;
+
+  for(var i = 0; i < l; i++){
+    this.move_autonomous( moves[i].move, this.data.physics_delta );
+  }
+},
+
+{% endcodeblock %}

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Node.js | Peter Gledhill, Freelance Developer]]></title>
   <link href="http://www.peteg.eu/blog/categories/node-dot-js/atom.xml" rel="self"/>
   <link href="http://www.peteg.eu/"/>
-  <updated>2013-11-28T13:34:22+00:00</updated>
+  <updated>2013-11-29T13:50:33+00:00</updated>
   <id>http://www.peteg.eu/</id>
   <author>
     <name><![CDATA[Peter Gledhill]]></name>
@@ -87,6 +87,151 @@
 <li>If a move is corrected then update the position based on the result from the server.  Any moves which have occurred since this corrected move must be calculated again on the client.</li>
 </ol>
 
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>game-client.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// this function is called roughly every 15 ms</span>
+</span><span class='line'><span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="c1">// get current client time</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">time</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="c1">// get move based on inputs</span>
+</span><span class='line'>  <span class="c1">// this will be an array of direction to move such as [&amp;lsquo;l&amp;rsquo;, &amp;lsquo;u&amp;rsquo;] for left and up</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">move</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">get_move</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="c1">// save move</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">me</span><span class="p">.</span><span class="nx">moves</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">move</span><span class="p">,</span> <span class="nx">t</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="c1">// apply the move locally</span>
+</span><span class='line'>  <span class="c1">// we use a fixed delta time because we have physics based movement</span>
+</span><span class='line'>  <span class="c1">// physics delta is hardcoded to 0.015 &amp;ndash; every 15 ms</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">move_autonomous</span><span class="p">(</span> <span class="nx">move</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">physics_delta</span> <span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="c1">// inform the server of our move</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">server_move</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">move</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">me</span><span class="p">.</span><span class="nx">accel</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">me</span><span class="p">.</span><span class="nx">pos</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>game-server.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">server_move</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">client_id</span><span class="p">,</span> <span class="nx">player</span><span class="p">,</span> <span class="nx">time</span><span class="p">,</span> <span class="nx">move</span><span class="p">,</span> <span class="nx">client_accel</span><span class="p">,</span> <span class="nx">client_pos</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">player</span><span class="p">.</span><span class="nx">controller</span><span class="p">.</span><span class="nx">apply_move</span><span class="p">(</span><span class="nx">move</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">physics_delta</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="k">if</span><span class="p">(</span><span class="nx">player</span><span class="p">.</span><span class="nx">pos</span><span class="p">.</span><span class="nx">equals</span><span class="p">(</span><span class="nx">client_pos</span><span class="p">)){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">transport</span><span class="p">.</span><span class="nx">good_move</span><span class="p">(</span> <span class="nx">client_id</span><span class="p">,</span> <span class="nx">time</span> <span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span><span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// this be passed to move_corrected in game-client</span>
+</span><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">transport</span><span class="p">.</span><span class="nx">ajust_move</span><span class="p">(</span>
+</span><span class='line'>  <span class="nx">client_id</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nx">t</span><span class="o">:</span> <span class="nx">time</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">p</span><span class="o">:</span> <span class="nx">player</span><span class="p">.</span><span class="nx">pos</span><span class="p">.</span><span class="nx">toObject</span><span class="p">(),</span>
+</span><span class='line'>    <span class="nx">v</span><span class="o">:</span> <span class="nx">player</span><span class="p">.</span><span class="nx">vel</span><span class="p">.</span><span class="nx">toObject</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'><span class="p">},</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>game-client.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">move_corrected</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">pos</span><span class="p">,</span> <span class="nx">vel</span><span class="p">){</span>
+</span><span class='line'>  <span class="c1">// update position / velocity to match server values for this move</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">me</span><span class="p">.</span><span class="nx">pos</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span> <span class="nx">pos</span> <span class="p">);</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">me</span><span class="p">.</span><span class="nx">vel</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span> <span class="nx">vel</span> <span class="p">);</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">me</span><span class="p">.</span><span class="nx">moves</span><span class="p">.</span><span class="nx">clear_from_time</span><span class="p">(</span> <span class="nx">time</span> <span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="c1">// rerun all moves which were made after this one      &lt;br/&gt;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">moves</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">me</span><span class="p">.</span><span class="nx">moves</span><span class="p">.</span><span class="nx">all</span><span class="p">();</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">moves</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">move_autonomous</span><span class="p">(</span> <span class="nx">moves</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">move</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">physics_delta</span> <span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'><span class="p">},</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
